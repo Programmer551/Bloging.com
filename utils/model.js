@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 
 if (mongoose.connection.models["Blog"]) {
@@ -8,15 +7,23 @@ if (mongoose.connection.models["Blog"]) {
 } else {
   // Define the model
   const contactSchema = new mongoose.Schema({
-    email: {
+    blog: {
       type: String,
-      required: [true, "Must Provide the email!"],
+      required: [true, "Must Provide the Blog!"],
       trim: true,
     },
-    message: {
+    title: {
       type: String,
-      required: [true, "Must Provide the Message!"],
+      required: [true, "Must Provide the Title!"],
       trim: true,
+    },
+    category: {
+      type: String,
+      required: [true, "Must Provide the Category!"],
+    },
+    id: {
+      type: String,
+      required: [true, "Must Provide the Id!"],
     },
   });
 
