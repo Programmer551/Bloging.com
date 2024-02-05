@@ -2,7 +2,7 @@ import { getSingleBlogAndUser } from "../../../../utils/actions";
 const Blog = async ({ params }) => {
   const blogId = params.blogId;
   const obj2 = await getSingleBlogAndUser(blogId);
-  // const { name, title, image, category } = obj2;
+
   console.log("Obj2 ", obj2);
   return (
     <section className='text-gray-600 body-font'>
