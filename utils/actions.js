@@ -34,7 +34,6 @@ export const submitBlog = async (formData) => {
 };
 export const getAllBlog = async () => {
   try {
-    // ConnectDB(process.env.MONGO_URI);
     const blog = await blogs.find();
     return blog;
   } catch (error) {
@@ -66,9 +65,10 @@ export const getSingleBlogAndUser = async (id1) => {
     const users = await clerkClient.users.getUserList();
     const { userId } = auth();
     if (!userId) {
-      return;
+      return null;
     }
-    users.map(async (user) => {
+
+    const userPromises = users.map(async (user) => {
       if (user.id == id) {
         const obj2 = {
           image: user.imageUrl,
@@ -77,12 +77,14 @@ export const getSingleBlogAndUser = async (id1) => {
           title,
           category,
         };
-        console.log("ServerObj2", obj2);
+
         return obj2;
-        // NextResponse.json(obj2);
       }
     });
+
+    return Promise.all(userPromises);
   } catch (error) {
     console.log(error);
+    return null;
   }
 };

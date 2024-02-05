@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 if (mongoose.connection.models["blogs"]) {
   // Model already exists, no need to redefine
-  console.log("Model 'blogs' already exists");
+
   module.exports = mongoose.model("blogs");
 } else {
   // Define the model
@@ -34,13 +34,12 @@ if (mongoose.connection.models["blogs"]) {
   // Try to delete the existing model
   try {
     delete mongoose.connection.models["blogs"];
-    console.log("Model 'blogs' deleted from mongoose.models");
   } catch (error) {
     console.error("Error deleting model 'blogs':", error.message);
   }
 
   // Create and export the model
   const blogs = mongoose.model("blogs", contactSchema);
-  console.log("Model 'blogs' defined and exported");
+
   module.exports = blogs;
 }
