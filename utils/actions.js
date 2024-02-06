@@ -1,9 +1,10 @@
 "use server";
 import { auth, clerkClient } from "@clerk/nextjs";
 require("dotenv").config();
-// import { NextResponse } from "next/server";
+
 import ConnectDB from "./connect";
-import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+
 ConnectDB(process.env.MONGO_URI);
 let blogs = require("./model");
 
@@ -86,5 +87,27 @@ export const getSingleBlogAndUser = async (id1) => {
   } catch (error) {
     console.log(error);
     return null;
+  }
+};
+export const getUserBlogs = async (userId) => {
+  try {
+    const userBlogs = await blogs.find({ id: userId });
+    return userBlogs;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const Delete_Blog = async (formData) => {
+  try {
+    const { userId } = auth();
+    const blogId = formData.get("blogId");
+    const blog = await blogs.find({ _id: blogId });
+    if (userId == blog[0].id) {
+      await blogs.deleteOne({ _id: blogId });
+      revalidatePath("/");
+      return "Done";
+    }
+  } catch (error) {
+    console.log(error);
   }
 };

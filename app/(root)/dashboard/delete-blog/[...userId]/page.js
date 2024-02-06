@@ -1,10 +1,8 @@
-// "use client";
-import Card from "../../components/shared/card";
-import { getAllBlog } from "../../utils/actions";
-
-const Home = async () => {
-  const blogs = await getAllBlog();
-
+import { getUserBlogs } from "../../../../../utils/actions";
+import Card from "../../../../../components/shared/card";
+const Delete_Blog = async ({ params }) => {
+  const { userId } = params;
+  const blogs = await getUserBlogs(userId);
   return (
     <>
       <div className='flex flex-wrap justify-center'>
@@ -16,6 +14,7 @@ const Home = async () => {
               name={blog.name}
               id={blog.id}
               blogId={blog._id}
+              del={true}
             />
           );
         })}
@@ -23,4 +22,4 @@ const Home = async () => {
     </>
   );
 };
-export default Home;
+export default Delete_Blog;
