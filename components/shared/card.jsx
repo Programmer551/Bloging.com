@@ -1,25 +1,25 @@
 import Link from "next/link";
 import { Delete_Blog } from "../../utils/actions";
-const Card = ({ title, category, name, blogId, del }) => {
-  if (!del) {
+const Card = ({ title, category, name, blogId, del, edit }) => {
+  if (!del && !edit) {
     return (
-      <div className='card w-96  shadow-xl m-4 bg-emerald-200	'>
+      <div className='card w-96  shadow-xl m-4 bg-emerald-200bg-violet-300	'>
         <div className='card-body items-center text-center'>
           <h2 className='card-title'>Title: {title}</h2>
           <p>Category: {category}</p>
           <p>Written By :{name}</p>
           <div className='card-actions'>
             <Link href={`/blog/${blogId}`}>
-              <button className='btn btn-accent'>Open</button>
+              <button className='btn bg-cyan-300	'>Open</button>
             </Link>
           </div>
         </div>
       </div>
     );
   }
-  if (del) {
+  if (del && !edit) {
     return (
-      <div className='card w-96  shadow-xl m-4 bg-emerald-200'>
+      <div className='card w-96  shadow-xl m-4 bg-emerald-200bg-violet-300'>
         <div className='card-body items-center text-center'>
           <h2 className='card-title'>Title: {title}</h2>
           <p>Category: {category}</p>
@@ -58,6 +58,22 @@ const Card = ({ title, category, name, blogId, del }) => {
               </div>
             </div>
             {}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (!del && edit) {
+    return (
+      <div className='card w-96  shadow-xl m-4 	bg-violet-300'>
+        <div className='card-body items-center text-center'>
+          <h2 className='card-title'>Title: {title}</h2>
+          <p>Category: {category}</p>
+          <p>Written By :{name}</p>
+          <div className='card-actions'>
+            <Link href={`/blog/edit/${blogId}`}>
+              <button className='btn bg-cyan-300	'>Edit</button>
+            </Link>
           </div>
         </div>
       </div>

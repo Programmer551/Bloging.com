@@ -29,6 +29,10 @@ if (mongoose.connection.models["blogs"]) {
       type: String,
       required: [true, "Must Provide the Name!"],
     },
+    comments: {
+      type: Array,
+      default: [],
+    },
   });
 
   // Try to delete the existing model

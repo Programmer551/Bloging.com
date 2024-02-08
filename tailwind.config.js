@@ -34,10 +34,11 @@ module.exports = {
     },
   },
   plugins: [require("tailwindcss-animate"), require("daisyui")],
+  
 };
-import { withUt } from "uploadthing/tw";
+// import { withUt } from "uploadthing/tw";
 
-export default withUt({
-  // Your existing Tailwind config
-  content: ["./src/**/*.{ts,tsx,mdx}"],
-});
+// export default withUt({
+//   // Your existing Tailwind config
+//   content: ["./src/**/*.{ts,tsx,mdx}"],
+// });

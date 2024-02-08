@@ -5,13 +5,13 @@ const Create_Blog_Button = () => {
   const { isLoaded, user } = useUser();
   if (isLoaded && user) {
     return (
-      <div>
+      <div className='flex flex-col'>
         <Link href={`/dashboard/create-blog/${user.id}`}>
-          <button className='btn btn-outline btn-info'>Create your Blog</button>
+          <button className='btn btn-outline btn-info m-2'>Create your Blog</button>
         </Link>
 
         <Link href={`/dashboard/delete-blog/${user.id}`}>
-          <button className='btn btn-outline btn-info'>Delete your Blog</button>
+          <button className='btn btn-outline btn-info m-2'>Delete your Blog</button>
         </Link>
       </div>
     );

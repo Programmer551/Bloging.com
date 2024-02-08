@@ -1,10 +1,10 @@
 import { getSingleBlogAndUser } from "../../../../utils/actions";
+import CommentsForm from "../../../../components/shared/add-comments";
 const Blog = async ({ params }) => {
   const blogId = params.blogId;
   const obj2 = await getSingleBlogAndUser(blogId);
   const data = obj2.find((item) => item);
-  const { name, image, blog, title, category } = data;
-
+  const { name, image, blog, title, category, comments } = data;
   return (
     <section className='text-gray-600 body-font'>
       <div className='container px-5 py-24 mx-auto flex flex-col'>
@@ -35,6 +35,10 @@ const Blog = async ({ params }) => {
           </div>
         </div>
       </div>
+      <CommentsForm
+        id={blogId}
+        comments={comments}
+      />
     </section>
   );
 };

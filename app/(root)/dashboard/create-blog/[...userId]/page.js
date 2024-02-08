@@ -8,47 +8,47 @@ const UserBlogs = ({ params }) => {
           <input
             type='text'
             name='id'
-            className='none text-white'
+            className='hidden'
             value={id}
             readOnly
           />
           <div className='container px-5 py-24 mx-auto'>
-            <div className='flex flex-col text-center w-full mb-12'>
+            <div className='flex flex-col text-center w-full mb-12 '>
               <h1 className='sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900'>
                 Create your Blog
               </h1>
               <div className='lg:w-2/3 mx-auto leading-relaxed text-base'>
                 Select the Category
                 <div className='form-control'>
-                  <label className='label cursor-pointer'>
+                  <label className='label cursor-pointer relative max-sm:right-1/2	'>
                     <span className='label-text ml-96'>Fiction</span>
                     <input
                       type='radio'
                       name='category'
                       value='Fiction'
-                      className='radio checked:bg-red-500 mr-96'
+                      className='radio checked:bg-red-500 sm:mr-96 '
                     />
                   </label>
                 </div>
                 <div className='form-control'>
-                  <label className='label cursor-pointer'>
+                  <label className='label cursor-pointer relative max-sm:right-1/2	'>
                     <span className='label-text ml-96'>Non Fiction</span>
                     <input
                       type='radio'
                       value='Non Fiction'
                       name='category'
-                      className='radio checked:bg-blue-500 mr-96'
+                      className='radio checked:bg-blue-500 sm:mr-96 '
                     />
                   </label>
                 </div>
                 <div className='form-control'>
-                  <label className='label cursor-pointer'>
+                  <label className='label cursor-pointer relative max-sm:right-1/2	'>
                     <span className='label-text ml-96'>Other</span>
                     <input
                       type='radio'
                       name='category'
                       value='Other'
-                      className='radio checked:bg-green-500 mr-96'
+                      className='radio checked:bg-green-500 sm:mr-96 '
                     />
                   </label>
                 </div>

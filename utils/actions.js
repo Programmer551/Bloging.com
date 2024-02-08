@@ -7,7 +7,9 @@ import { revalidatePath } from "next/cache";
 
 ConnectDB(process.env.MONGO_URI);
 let blogs = require("./model");
-
+let Contact = require("./contact-model");
+import { toast } from "react-toastify";
+import { redirect } from "next/navigation";
 export const submitBlog = async (formData) => {
   try {
     const users = await clerkClient.users.getUserList();
@@ -50,6 +52,7 @@ const getSingleBlog = async (id) => {
       id: SingleBlog[0].id,
       title: SingleBlog[0].title,
       category: SingleBlog[0].category,
+      comments: SingleBlog[0].comments,
     };
 
     return obj;
@@ -61,7 +64,7 @@ export const getSingleBlogAndUser = async (id1) => {
   try {
     const obj = await getSingleBlog(id1);
 
-    const { blog, id, title, category } = obj;
+    const { blog, id, title, category, comments } = obj;
 
     const users = await clerkClient.users.getUserList();
     const { userId } = auth();
@@ -77,6 +80,7 @@ export const getSingleBlogAndUser = async (id1) => {
           blog,
           title,
           category,
+          comments,
         };
 
         return obj2;
@@ -109,5 +113,75 @@ export const Delete_Blog = async (formData) => {
     }
   } catch (error) {
     console.log(error);
+  }
+};
+export const createComment = async () => {
+  try {
+    const { userId } = auth();
+    if (!userId) {
+      return;
+    }
+
+    const users = await clerkClient.users.getUserList();
+    const userPromises = users.map(async (user) => {
+      if (user.id == userId) {
+        const obj2 = {
+          image: user.imageUrl,
+          name: user.username,
+        };
+        return obj2;
+      }
+    });
+
+    return Promise.all(userPromises);
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const addComment = async (formData) => {
+  try {
+    let obj = await createComment();
+    for (let i of obj) {
+      if (!i) {
+      } else {
+        obj = i;
+      }
+    }
+
+    const comment = formData.get("comment");
+    const blogId = formData.get("blogId");
+
+    // Fetch the blog
+    const blog = await blogs.findOne({ _id: blogId });
+
+    const newComments = blog.comments;
+
+    const new2 = { ...obj, comment };
+
+    newComments.push(new2);
+
+    console.log("new comments ", newComments);
+
+    await blogs.findOneAndUpdate(
+      { _id: blogId },
+      { $set: { comments: newComments } },
+    );
+
+    revalidatePath("/");
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const SubmitContact = async (formData) => {
+  try {
+    const { userId } = auth();
+    if (!userId) {
+      return;
+    }
+    const email = formData.get("email");
+    const message = formData.get("message");
+    await Contact.create({ email, message });
+  } catch (err) {
+    console.log(err);
   }
 };

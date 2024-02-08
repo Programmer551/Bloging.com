@@ -13,7 +13,7 @@ const UserIcon = () => {
         </div>
       ) : (
         <button className='btn btn-primary '>
-          <Link href='sign-in'>SignIn</Link>
+          <Link href='/sign-in'>SignIn</Link>
         </button>
       )}
     </>
