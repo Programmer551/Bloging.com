@@ -13,6 +13,10 @@ const Comments = ({ comments }) => {
                 />
               </div>
             </div>
+
+
+
+            
             <div className='chat-header'>{comment.name}</div>
             <div className='chat-bubble'>{comment.comment}</div>
           </div>

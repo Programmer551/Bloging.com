@@ -5,7 +5,7 @@ import ContactUs from "../../components/shared/contact-us";
 import Footer from "../../components/shared/Footer";
 export default function RootLayout({ children }) {
   return (
-    <div className='flex h-screen flex-col'>
+    <div className='flex flex-col h-screen'>
       <main className=''>
         <ToastContainer />
         <Navbar />

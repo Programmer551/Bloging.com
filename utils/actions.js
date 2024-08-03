@@ -8,8 +8,7 @@ import { revalidatePath } from "next/cache";
 ConnectDB(process.env.MONGO_URI);
 let blogs = require("./model");
 let Contact = require("./contact-model");
-import { toast } from "react-toastify";
-import { redirect } from "next/navigation";
+
 export const submitBlog = async (formData) => {
   try {
     const users = await clerkClient.users.getUserList();
